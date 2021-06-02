@@ -48,10 +48,10 @@ public class AnnouncementController {
 		return this.announcementService.getAll();
 	}
 	
-	@GetMapping("/getallsorted")
+	@GetMapping("/getallstatustrueandsorted")
 	public DataResult<List<Announcement>> getAllSorted()
 	{
-		return this.announcementService.getByStatus();
+		return this.announcementService.getAllSorted();
 	}
 	
 	@GetMapping("/getallannouncementsbycompanyname")
@@ -60,4 +60,9 @@ public class AnnouncementController {
 		return this.announcementService.getByCompanyName(companyName);
 	}
 	
+	@GetMapping("/getallstatustrue")
+	public DataResult<List<Announcement>> getAllStatusTrue()
+	{
+		return this.announcementService.getAllStatusTrue();
+	}
 }

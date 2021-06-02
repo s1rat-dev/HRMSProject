@@ -3,7 +3,6 @@ package kodlamaio.Hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.Hrms.business.abstracts.AnnouncementService;
@@ -42,16 +41,15 @@ public class AnnouncementManager implements AnnouncementService{
 
 
 	@Override
-	public DataResult<List<Announcement>> getByStatus() {
-		Sort sortedCreatedDate = Sort.by(Sort.Direction.ASC, "createdDate");
-		return new SuccessDataResult<List<Announcement>>(this.announcementDao.findByStatus(true,sortedCreatedDate),"Başarılı");
+	public DataResult<List<Announcement>> getAllSorted() {
+		return new SuccessDataResult<List<Announcement>>(this.announcementDao.getByStatusTrueOrderByCreatedDateAsc(),"Başarılı");
 	}
 
 
 
 	@Override
 	public DataResult<List<Announcement>> getByCompanyName(String companyName) {
-		return new SuccessDataResult<List<Announcement>>(this.announcementDao.getByEmployerCompanyNameAndStatus(companyName, true),"Başarılı");
+		return new SuccessDataResult<List<Announcement>>(this.announcementDao.getByEmployerCompanyNameAndStatusTrue(companyName),"Başarılı");
 	}
 
 
@@ -67,6 +65,13 @@ public class AnnouncementManager implements AnnouncementService{
 		}
 		else
 			return new ErrorResult("İlan zaten silinmiş.");
+	}
+
+
+
+	@Override
+	public DataResult<List<Announcement>> getAllStatusTrue() {
+		return new SuccessDataResult<List<Announcement>>(this.announcementDao.getByStatusTrue());
 	}
 
 }

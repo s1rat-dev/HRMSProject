@@ -10,7 +10,8 @@ import kodlamaio.Hrms.entities.concretes.Announcement;
 public interface AnnouncementService {
 	Result add(Announcement announcement);
 	DataResult<List<Announcement>> getAll();
-	DataResult<List<Announcement>> getByStatus();
+	DataResult<List<Announcement>> getAllSorted();
+	DataResult<List<Announcement>> getAllStatusTrue();
 	DataResult<List<Announcement>> getByCompanyName(String companyName);
 	Result closeAnnouncement(int id); 
 	
